@@ -16,18 +16,13 @@ class _AdddScreenState extends State<AdddScreen> {
   final CollectionReference donor =
       FirebaseFirestore.instance.collection('donor');
   void addDonor() {
-    final name = nameController.text;
-    final number = numberController.text;
-    if (name.isNotEmpty && number.isNotEmpty && selectedGroup != null) {
-      final data = {
-        'name': nameController.text,
-        'phone number': numberController.text,
-        'blood group': selectedGroup
-      };
-      donor.add(data);
-    } else {
-      print('error');
-    }
+    final data = {
+      'name': nameController.text,
+      'phone number': numberController.text,
+      'blood group': selectedGroup
+    };
+    donor.add(data);
+    setState(() {});
   }
 
   @override

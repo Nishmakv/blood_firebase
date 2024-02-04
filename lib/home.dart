@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final CollectionReference donor =
       FirebaseFirestore.instance.collection('donor');
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         radius: 25,
                         backgroundColor: Colors.red,
                         child: Text(
-                          donorSnap['blood group'],
+                          donorSnap['blood group'] ?? '',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(donorSnap['name']),
+                          Text(donorSnap['name'] ?? ''),
                           IconButton(
                             onPressed: () {},
                             icon: Icon(
@@ -55,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      subtitle: Text(donorSnap['phone number'].toString()),
+                      subtitle:
+                          Text(donorSnap['phone number'].toString() ?? ''),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: Icon(
@@ -85,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context) => AdddScreen(),
             ),
           );
+          setState(() {});
         },
         backgroundColor: Colors.red,
         child: const Icon(Icons.add, size: 40, color: Colors.white),
