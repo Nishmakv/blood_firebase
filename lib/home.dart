@@ -1,4 +1,5 @@
 import 'package:blood_firebase/add.dart';
+import 'package:blood_firebase/update.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final CollectionReference donor =
       FirebaseFirestore.instance.collection('donor');
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         backgroundColor: Colors.red,
                         child: Text(
                           donorSnap['blood group'] ?? '',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       title: Row(
@@ -47,8 +49,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(donorSnap['name'] ?? ''),
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return UpdateScreen(
+                                    name: donorSnap['name'] ?? '',
+                                    number:
+                                        donorSnap['phone number'].toString(),
+                                    bloodGroup: donorSnap['blood group'] ?? '',
+                                    id: donorSnap.id,
+                                  );
+                                },
+                              ));
+                            },
+                            icon: const Icon(
                               Icons.edit,
                               color: Colors.blue,
                             ),
@@ -59,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(donorSnap['phone number'].toString() ?? ''),
                       trailing: IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
@@ -69,12 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox();
+                return const SizedBox();
               },
               itemCount: snapshot.data!.docs.length,
             );
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         },
       ),
@@ -83,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AdddScreen(),
+              builder: (context) => const AdddScreen(),
             ),
           );
           setState(() {});

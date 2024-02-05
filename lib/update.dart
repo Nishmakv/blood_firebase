@@ -1,14 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AdddScreen extends StatefulWidget {
-  const AdddScreen({super.key});
+class UpdateScreen extends StatefulWidget {
+  final String name;
+  final String number;
+  final String id;
+  final String bloodGroup;
+  const UpdateScreen(
+      {super.key,
+      required this.name,
+      required this.number,
+      required this.id,
+      required this.bloodGroup});
 
   @override
-  State<AdddScreen> createState() => _AdddScreenState();
+  State<UpdateScreen> createState() => UpdateScreenState();
 }
 
-class _AdddScreenState extends State<AdddScreen> {
+class UpdateScreenState extends State<UpdateScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   final List bloodGroup = ['A+', 'A-', 'B+', 'B-', 'OB-', 'OB+'];
@@ -23,6 +32,14 @@ class _AdddScreenState extends State<AdddScreen> {
     };
     donor.add(data);
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.name;
+    numberController.text = widget.number;
+    selectedGroup = widget.bloodGroup;
   }
 
   @override
@@ -90,7 +107,7 @@ class _AdddScreenState extends State<AdddScreen> {
                   addDonor();
                   Navigator.pop(context);
                 },
-                child: const Text('Submit'),
+                child: const Text('Update'),
               ),
             ],
           ),
