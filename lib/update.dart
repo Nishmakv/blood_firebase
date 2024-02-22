@@ -40,6 +40,7 @@ class UpdateScreenState extends State<UpdateScreen> {
     nameController.text = widget.name;
     numberController.text = widget.number;
     selectedGroup = widget.bloodGroup;
+    print(selectedGroup);
   }
 
   @override
@@ -98,7 +99,7 @@ class UpdateScreenState extends State<UpdateScreen> {
                     )
                     .toList(),
                 onChanged: (value) {
-                  selectedGroup = value as String? ?? '';
+                  selectedGroup = value as String;
                 },
               ),
               const SizedBox(height: 10),
